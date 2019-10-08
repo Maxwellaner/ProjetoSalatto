@@ -275,7 +275,7 @@ public class PedidoDAO {
         List<Pedido> listaPedidos = new ArrayList<Pedido>();
         try {
             conn = Conexao.conectar();
-            comando = conn.prepareStatement("SELECT * FROM pedidos WHERE dataEntrega=date_add(curdate(), interval 1 day)");
+            comando = conn.prepareStatement("SELECT * FROM pedidos WHERE dataEntrega >= NOW() ORDER BY dataEntrega ASC");
             rs = comando.executeQuery();
 
             while (rs.next()) {

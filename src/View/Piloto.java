@@ -390,10 +390,10 @@ public class Piloto extends javax.swing.JFrame {
             this.jListPedidosFazer.setModel(dfmodel);
             pedidosHoje.forEach((p) -> {
                 if (p.getIdCliente() != 0) {
-                    dfmodel.addElement(p.getCliente().getNome() + " - Endereço: " + p.getCliente().getEndereco()
+                    dfmodel.addElement(p.getDataEntrega() + " - " + p.getCliente().getNome() + " - Endereço: " + p.getCliente().getEndereco()
                             + " - Valor total: R$ " + Util.formatarValor(p.getValorTotal()));
                 } else {
-                    dfmodel.addElement(p.getEmpresa().getNomeFantasia() + " - Endereço: " + p.getEmpresa().getEndereco()
+                    dfmodel.addElement(p.getDataEntrega() + " - " + p.getEmpresa().getNomeFantasia() + " - Endereço: " + p.getEmpresa().getEndereco()
                             + " - Valor total: R$ " + Util.formatarValor(p.getValorTotal()));
                 }
             });
