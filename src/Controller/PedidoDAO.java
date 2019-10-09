@@ -93,7 +93,7 @@ public class PedidoDAO {
         }
     }
 
-    public static void darBaixa() {
+    private static void darBaixa() {
 
         Connection conn = null;
         PreparedStatement comando = null;
@@ -153,6 +153,8 @@ public class PedidoDAO {
                 }
 
             }
+            
+            
 
         } catch (Exception e) {
             System.out.println("Erro na lista dos pedidos do dia!");

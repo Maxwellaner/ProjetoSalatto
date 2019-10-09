@@ -1,5 +1,10 @@
 package View;
 
+import View.Cadastros.CadastroProdutos;
+import View.Cadastros.CadastroMateriaPrima;
+import View.Cadastros.CadastroEmpresa;
+import View.Cadastros.CadastroClientes;
+import View.Cadastros.CadastrarPedido;
 import Controller.PedidoDAO;
 import View.Relatorios.GerarRelatorio;
 import java.awt.event.ActionEvent;

@@ -1,4 +1,4 @@
-package View;
+package View.Cadastros;
 
 import Controller.ProdutoDAO;
 import Model.Produto;

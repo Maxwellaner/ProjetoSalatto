@@ -1,4 +1,4 @@
-package View;
+package View.Cadastros;
 
 import Controller.ClienteDAO;
 import Model.Pessoa.Cliente;
@@ -51,49 +51,49 @@ public class CadastroClientes extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("Tw Cen MT", 1, 24)); // NOI18N
         jLabel1.setText("Cadastro de Clientes");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(310, 40, 238, 32);
+        jLabel1.setBounds(310, 40, 206, 27);
         jPanel1.add(jSeparator1);
         jSeparator1.setBounds(116, 80, 686, 10);
 
         jLabel2.setFont(new java.awt.Font("Tw Cen MT", 3, 14)); // NOI18N
         jLabel2.setText("Nome proprietário *");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(231, 145, 140, 19);
+        jLabel2.setBounds(231, 145, 140, 16);
 
         jLabel4.setFont(new java.awt.Font("Tw Cen MT", 3, 14)); // NOI18N
         jLabel4.setText("CPF *");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(231, 193, 40, 19);
+        jLabel4.setBounds(231, 193, 40, 16);
 
         jLabel5.setFont(new java.awt.Font("Tw Cen MT", 3, 14)); // NOI18N
         jLabel5.setText("Endereço *");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(231, 241, 80, 19);
+        jLabel5.setBounds(231, 241, 80, 16);
 
         jLabel7.setFont(new java.awt.Font("Tw Cen MT", 3, 14)); // NOI18N
         jLabel7.setText("Data nascimento");
         jPanel1.add(jLabel7);
-        jLabel7.setBounds(231, 436, 130, 19);
+        jLabel7.setBounds(231, 436, 130, 16);
 
         jLabel8.setFont(new java.awt.Font("Tw Cen MT", 3, 14)); // NOI18N
         jLabel8.setText("Telefone");
         jPanel1.add(jLabel8);
-        jLabel8.setBounds(231, 340, 59, 19);
+        jLabel8.setBounds(231, 340, 47, 16);
 
         jLabel9.setFont(new java.awt.Font("Tw Cen MT", 3, 14)); // NOI18N
         jLabel9.setText("Celular/WhatsApp * ");
         jPanel1.add(jLabel9);
-        jLabel9.setBounds(231, 292, 150, 19);
+        jLabel9.setBounds(231, 292, 150, 16);
 
         jLabel10.setFont(new java.awt.Font("Tw Cen MT", 3, 14)); // NOI18N
         jLabel10.setText("E-mail *");
         jPanel1.add(jLabel10);
-        jLabel10.setBounds(231, 388, 60, 19);
+        jLabel10.setBounds(231, 388, 60, 16);
 
         jLabel14.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
         jLabel14.setText("Proprietário (Pessoa física)");
         jPanel1.add(jLabel14);
-        jLabel14.setBounds(310, 100, 235, 24);
+        jLabel14.setBounds(310, 100, 210, 21);
 
         txtNomeCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -119,7 +119,7 @@ public class CadastroClientes extends javax.swing.JDialog {
             }
         });
         jPanel1.add(jButtonCadastroCliente);
-        jButtonCadastroCliente.setBounds(706, 504, 57, 33);
+        jButtonCadastroCliente.setBounds(706, 504, 59, 33);
         jPanel1.add(txtCPF);
         txtCPF.setBounds(231, 215, 365, 20);
         jPanel1.add(txtNascimentoCliente);
@@ -132,7 +132,7 @@ public class CadastroClientes extends javax.swing.JDialog {
         jLabel3.setFont(new java.awt.Font("Tw Cen MT", 1, 11)); // NOI18N
         jLabel3.setText("* Campos obrigatórios");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(490, 500, 110, 15);
+        jLabel3.setBounds(490, 500, 110, 13);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

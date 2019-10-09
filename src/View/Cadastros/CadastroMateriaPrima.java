@@ -1,4 +1,4 @@
-package View;
+package View.Cadastros;
 
 import Controller.MateriaPrimaDAO;
 import Model.MateriaPrima;

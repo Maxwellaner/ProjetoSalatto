@@ -1,5 +1,6 @@
 package View;
 
+import View.Cadastros.CadastrarPedido;
 import Controller.MateriaPrimaDAO;
 import Controller.ProdutoDAO;
 import Model.MateriaPrima;
