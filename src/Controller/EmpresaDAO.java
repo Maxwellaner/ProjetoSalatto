@@ -43,7 +43,7 @@ public class EmpresaDAO {
     }
     
     public static List<Empresa> listarEmpresas() throws Exception {
-        String sql = "SELECT id, nomeFantasia, endereco, telefone FROM empresas ORDER BY nomeFantasia";
+        String sql = "SELECT * FROM empresas ORDER BY nomeFantasia";
         Connection conn = Conexao.conectar();
         PreparedStatement comando = conn.prepareStatement(sql.toString());
         ResultSet consulta = comando.executeQuery();

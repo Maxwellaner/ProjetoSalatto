@@ -474,7 +474,7 @@ public class CadastrarPedido extends javax.swing.JDialog {
             adiantamento = 0;
         } else {
             valorTotal = valorTotal - Double.parseDouble(this.txtAdiantamento.getText());
-            valorTotal = Double.parseDouble(Util.formatarValor(valorTotal));
+            Util.formatarValor(valorTotal);
             adiantamento = Double.parseDouble(this.txtAdiantamento.getText());
             Util.formatarValor(adiantamento);
         }

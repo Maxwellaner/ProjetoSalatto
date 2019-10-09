@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 public class ClienteDAO {
 
     public static List<Cliente> ListaClientes() throws Exception {
-        String sql = "SELECT id, nome, endereco, celular FROM clientes ORDER BY nome";
+        String sql = "SELECT * FROM clientes ORDER BY nome";
         Connection conn = Conexao.conectar();
         PreparedStatement comando = conn.prepareStatement(sql);
         ResultSet consulta = comando.executeQuery();

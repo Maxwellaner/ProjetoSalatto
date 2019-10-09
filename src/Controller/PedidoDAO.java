@@ -42,7 +42,7 @@ public class PedidoDAO {
                 comprador = "id_empresa";
             }
             String insertPedido = "INSERT INTO pedidos(isPago, adiantamento, valorTotal, dataPedido,"
-                    + "dataEntrega, " + comprador + ") VALUES(?,?,?,?,?,?)";
+                    + "dataEntrega, " + comprador + ", status" + ") VALUES(?,?,?,?,?,?,?)";
 
             try {
                 // INSERÇÃO NA TABELA PEDIDOS
@@ -53,6 +53,7 @@ public class PedidoDAO {
                 comando.setDate(4, pedido.getDataPedido());
                 comando.setDate(5, (pedido.getDataEntrega()));
                 comando.setInt(6, idComprador);
+                comando.setString(7, "ABERTO");
 
                 comando.executeUpdate();
 
@@ -151,8 +152,7 @@ public class PedidoDAO {
                 } else {
                     listaPedidos.get(i).setEmpresa(empresaPedido(listaPedidos.get(i).getIdEmpresa()));
                 }
-                
-                listaPedidos.get(i).setProdutos(produtosPedido(i));
+                listaPedidos.get(i).setProdutos(produtosPedido(listaPedidos.get(i).getId()));
                 //System.out.println(listaPedidos.get(i));
             }
 
@@ -236,13 +236,13 @@ public class PedidoDAO {
             comando = conn.prepareStatement(s);
             //comando.setInt(1, i);
             rs = comando.executeQuery();
-            System.out.println(i);
+            //System.out.println(i);
             while (rs.next()) {
                 indiceProdutos.add(rs.getInt("id_produto"));
                 qntProdutos.add(rs.getInt("quantidade"));
             }
-            System.out.println(indiceProdutos);
-            System.out.println(qntProdutos);
+            //System.out.println(indiceProdutos);
+            //System.out.println(qntProdutos);
         } catch (Exception ex) {
             System.out.println("Erro ao buscar produtos na tabela pedido_produtos");
         }
@@ -255,7 +255,7 @@ public class PedidoDAO {
                 int idProduto = (int) indiceProdutos.get(j);
                 comando = conn.prepareStatement(sql + idProduto);
                 //comando.setInt(1, (int) indiceProdutos.get(j));
-                System.out.println(comando);
+                //System.out.println(comando);
                 rs = comando.executeQuery();
 
                 while (rs.next()) {
@@ -272,7 +272,7 @@ public class PedidoDAO {
                 }
                 
             }
-            System.out.println(listaProdutos);
+            //System.out.println(listaProdutos);
 
         } catch (Exception ex) {
             System.out.println("Erro ao buscar produtos do pedido");
