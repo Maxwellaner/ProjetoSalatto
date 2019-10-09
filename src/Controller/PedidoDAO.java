@@ -151,10 +151,10 @@ public class PedidoDAO {
                 } else {
                     listaPedidos.get(i).setEmpresa(empresaPedido(listaPedidos.get(i).getIdEmpresa()));
                 }
-
+                
+                listaPedidos.get(i).setProdutos(produtosPedido(i));
+                //System.out.println(listaPedidos.get(i));
             }
-            
-            
 
         } catch (Exception e) {
             System.out.println("Erro na lista dos pedidos do dia!");
@@ -231,46 +231,59 @@ public class PedidoDAO {
         List qntProdutos = new ArrayList();
 
         try {
+            String s = "SELECT * FROM pedido_produto WHERE id_pedido="+i;
             conn = Conexao.conectar();
-            comando = conn.prepareStatement("SELECT * pedido_produto WHERE id_pedido=?");
-            comando.setInt(1, i);
+            comando = conn.prepareStatement(s);
+            //comando.setInt(1, i);
             rs = comando.executeQuery();
-
+            System.out.println(i);
             while (rs.next()) {
                 indiceProdutos.add(rs.getInt("id_produto"));
                 qntProdutos.add(rs.getInt("quantidade"));
             }
+            System.out.println(indiceProdutos);
+            System.out.println(qntProdutos);
         } catch (Exception ex) {
-            System.out.println("Erro ao uscar produtos na tabela pedido_produtos");
+            System.out.println("Erro ao buscar produtos na tabela pedido_produtos");
         }
+        
 
         try {
-            conn = Conexao.conectar();
-            comando = conn.prepareStatement("SELECT * produtos WHERE id=?");
-            comando.setInt(1, (int) indiceProdutos.get(1));
-            rs = comando.executeQuery();
-
-            while (rs.next()) {
-                Produto p = new Produto();
-                p.setNome(rs.getString("nome"));
-                p.setId(rs.getInt("id"));
-                p.setQuantidadeEstoque(rs.getInt("quantidadeEstoque"));
-                p.setValorCompra(rs.getDouble("valorCompra"));
-                p.setValorVenda(rs.getDouble("valorVenda"));
-                p.setDescricao(rs.getString("descricao"));
-            }
             
-            for (int j = 0; j <= listaProdutos.size() - 1; j++) {
-                listaProdutos.get(i).setQuantidadePorPedido((int) qntProdutos.get(i));
+            String sql = "SELECT * FROM produtos WHERE id=";
+            for (int j = 0; j <= indiceProdutos.size() - 1; j++) {
+                int idProduto = (int) indiceProdutos.get(j);
+                comando = conn.prepareStatement(sql + idProduto);
+                //comando.setInt(1, (int) indiceProdutos.get(j));
+                System.out.println(comando);
+                rs = comando.executeQuery();
+
+                while (rs.next()) {
+                    Produto p = new Produto();
+                    p.setNome(rs.getString("nome"));
+                    p.setId(rs.getInt("id"));
+                    p.setQuantidadeEstoque(rs.getInt("quantidadeEstoque"));
+                    p.setValorCompra(rs.getDouble("valorCompra"));
+                    p.setValorVenda(rs.getDouble("valorVenda"));
+                    p.setDescricao(rs.getString("descricao"));
+                    p.setQuantidadePorPedido((int)qntProdutos.get(j));
+                    
+                    listaProdutos.add(p);
+                }
+                
             }
+            System.out.println(listaProdutos);
+
         } catch (Exception ex) {
             System.out.println("Erro ao buscar produtos do pedido");
         }
+        Conexao.fecharConexao(conn, comando, rs);
+
         return listaProdutos;
     }
 
     public static List<Pedido> pedidosFazer() {
-       Connection conn = null;
+        Connection conn = null;
         PreparedStatement comando = null;
         ResultSet rs = null;
         Date hoje = Util.dataAtual();
@@ -301,7 +314,8 @@ public class PedidoDAO {
                 } else {
                     listaPedidos.get(i).setEmpresa(empresaPedido(listaPedidos.get(i).getIdEmpresa()));
                 }
-
+                listaPedidos.get(i).setProdutos(produtosPedido(listaPedidos.get(i).getId()));
+                //System.out.println(listaPedidos.get(i));
             }
 
         } catch (Exception e) {

@@ -10,7 +10,7 @@ public class Produto {
     private double valorCompra;
     private double valorVenda;
     private String descricao;
-    private int quantidadePorPedido;
+    private int quantidadePorPedido; // variável auxiliar para preenchimento dos produtos em pedidos
 
     public Produto(String nome, double valorCompra, double valorVenda) {
         this.nome = nome;
