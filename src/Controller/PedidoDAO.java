@@ -127,7 +127,7 @@ public class PedidoDAO {
         List<Pedido> listaPedidos = new ArrayList<Pedido>();
         try {
             conn = Conexao.conectar();
-            comando = conn.prepareStatement("SELECT * FROM pedidos WHERE dataEntrega=?");
+            comando = conn.prepareStatement("SELECT * FROM pedidos WHERE dataEntrega=? AND status='ABERTO'");
             comando.setDate(1, hoje);
             rs = comando.executeQuery();
 
@@ -231,7 +231,7 @@ public class PedidoDAO {
         List qntProdutos = new ArrayList();
 
         try {
-            String s = "SELECT * FROM pedido_produto WHERE id_pedido="+i;
+            String s = "SELECT * FROM pedido_produto WHERE id_pedido=" + i;
             conn = Conexao.conectar();
             comando = conn.prepareStatement(s);
             //comando.setInt(1, i);
@@ -246,10 +246,9 @@ public class PedidoDAO {
         } catch (Exception ex) {
             System.out.println("Erro ao buscar produtos na tabela pedido_produtos");
         }
-        
 
         try {
-            
+
             String sql = "SELECT * FROM produtos WHERE id=";
             for (int j = 0; j <= indiceProdutos.size() - 1; j++) {
                 int idProduto = (int) indiceProdutos.get(j);
@@ -266,11 +265,11 @@ public class PedidoDAO {
                     p.setValorCompra(rs.getDouble("valorCompra"));
                     p.setValorVenda(rs.getDouble("valorVenda"));
                     p.setDescricao(rs.getString("descricao"));
-                    p.setQuantidadePorPedido((int)qntProdutos.get(j));
-                    
+                    p.setQuantidadePorPedido((int) qntProdutos.get(j));
+
                     listaProdutos.add(p);
                 }
-                
+
             }
             //System.out.println(listaProdutos);
 
@@ -286,11 +285,10 @@ public class PedidoDAO {
         Connection conn = null;
         PreparedStatement comando = null;
         ResultSet rs = null;
-        Date hoje = Util.dataAtual();
         List<Pedido> listaPedidos = new ArrayList<Pedido>();
         try {
             conn = Conexao.conectar();
-            comando = conn.prepareStatement("SELECT * FROM pedidos WHERE dataEntrega >= NOW() ORDER BY dataEntrega ASC");
+            comando = conn.prepareStatement("SELECT * FROM pedidos WHERE dataEntrega >= NOW() AND status='ABERTO' ORDER BY dataEntrega ASC");
             rs = comando.executeQuery();
 
             while (rs.next()) {
@@ -325,5 +323,64 @@ public class PedidoDAO {
         }
 
         return listaPedidos;
+    }
+
+    public static void fechaPedido(int indice) {
+        System.out.println(indice);
+        Connection conn = null;
+        PreparedStatement comando = null;
+        Date hoje = Util.dataAtual();
+        try {
+            String sql = "UPDATE pedidos SET status='FECHADO', dataFechamento=?" + " WHERE id=?";
+            conn = Conexao.conectar();
+            comando = conn.prepareStatement(sql);
+            comando.setDate(1, hoje);
+            comando.setInt(2, indice);
+            System.out.println(comando);
+            comando.executeUpdate();
+            //String sql2 = "UPTADE pedidos SET dataFechamento=?";
+            //comando = conn.prepareStatement(sql2);
+            //comando.setDate(1, hoje);
+            comando.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("Não foi possível fechar o pedido");
+            System.out.println(e.getMessage());
+        } finally {
+            Conexao.fecharConexao(conn, comando);
+        }
+    }
+
+    public static List<Pedido> pedidosFechadosHoje() {
+        Connection conn = null;
+        PreparedStatement comando = null;
+        ResultSet rs = null;
+        Date hoje = Util.dataAtual();
+        List<Pedido> pedidos = new ArrayList<>();
+        try {
+            conn = Conexao.conectar();
+            comando = conn.prepareStatement("SELECT * FROM pedidos WHERE dataFechamento=? AND status='FECHADO'");
+            comando.setDate(1, hoje);
+            rs = comando.executeQuery();
+
+            while (rs.next()) {
+                Pedido p = new Pedido();
+                p.setId(rs.getInt("id"));
+                p.setIdCliente(rs.getInt("id_cliente"));
+                p.setIdEmpresa(rs.getInt("id_empresa"));
+                p.setDataEntrega(rs.getDate("dataEntrega"));
+                p.setDataPedido(rs.getDate("dataPedido"));
+                p.setIsPago(rs.getBoolean("isPago"));
+                p.setValorTotal(rs.getDouble("valorTotal"));
+                p.setAdiantamento(rs.getDouble("adiantamento"));
+
+                pedidos.add(p);
+            }
+            System.out.println(pedidos);
+        } catch (Exception e) {
+            System.out.println("Não foi possível buscar os pedidos fechados hoje");
+        } finally {
+            Conexao.fecharConexao(conn, comando, rs);
+        }
+        return pedidos;
     }
 }

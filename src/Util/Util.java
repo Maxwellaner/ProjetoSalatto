@@ -67,6 +67,13 @@ public class Util {
         return dataSistema;
     }
     
+    public static String dataAtualFormatada() {
+        Date dataSistema = new Date(System.currentTimeMillis());
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        String result = formato.format(dataSistema);
+        return result;
+    }
+    
     public static Date amanha() {
         Date data = new Date(System.currentTimeMillis());
         Calendar calendar = Calendar.getInstance();

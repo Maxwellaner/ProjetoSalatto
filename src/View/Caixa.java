@@ -1,12 +1,36 @@
 package View;
 
+import Controller.PedidoDAO;
+import Model.Pedido;
+import java.util.List;
+import Util.Util;
+import View.Cadastros.CadastrarPedido;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
+
 public class Caixa extends javax.swing.JDialog {
 
+    private List<Pedido> pedidos;
+    
     public Caixa(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.jLabelDataAtual.setText(Util.dataAtualFormatada());
+        preencherListaPedidos();
+        informacoes();
     }
 
+    public List<Pedido> getPedidos() {
+        return pedidos;
+    }
+
+    public void setPedidos(List<Pedido> pedidos) {
+        this.pedidos = pedidos;
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -146,4 +170,28 @@ public class Caixa extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
+
+    // TO DO: Arrumar este método que esta retornando nullException
+    private void preencherListaPedidos() {
+        try {
+            pedidos = new ArrayList<>(PedidoDAO.pedidosFechadosHoje());
+            DefaultListModel dfmodel = new DefaultListModel();
+            this.jListPedidosFechados.setModel(dfmodel);
+            pedidos.forEach((p) -> {
+                if (p.getIdCliente() != 0) {
+                    dfmodel.addElement(p.getCliente().getNome() + " - Endereço: " + p.getCliente().getEndereco()
+                            + " - Valor total: R$ " + Util.formatarValor(p.getValorTotal()));
+                } else {
+                    dfmodel.addElement(p.getEmpresa().getNomeFantasia() + " - Endereço: " + p.getEmpresa().getEndereco()
+                            + " - Valor total: R$ " + Util.formatarValor(p.getValorTotal()));
+                }
+            });
+        } catch (Exception ex) {
+            Logger.getLogger(CadastrarPedido.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void informacoes() {
+        // TO DO: Calcular e mostrar na tela todas as outras informações
+    }
 }

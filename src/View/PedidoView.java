@@ -1,12 +1,14 @@
 package View;
 
+import Controller.PedidoDAO;
 import Model.Pedido;
 import Model.Produto;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class PedidoView extends javax.swing.JDialog {
 
-    private Pedido pedido;
+    private final Pedido pedido;
 
     public PedidoView(java.awt.Frame parent, boolean modal, Pedido pedido) {
         super(parent, modal);
@@ -35,13 +37,13 @@ public class PedidoView extends javax.swing.JDialog {
             this.jLabelContato.setText(pedido.getCliente().getCelular() + "/" + pedido.getCliente().getTelefone());
         }
         DefaultTableModel dfmodel = (DefaultTableModel) jTableProdutos.getModel();
-        
+
         for (int i = 0; i < pedido.getProdutos().size(); i++) {
             Produto produto = pedido.getProdutos().get(i);
             Object quantidade = pedido.getProdutos().get(i).getQuantidadePorPedido();
             Object[] dados = {produto.getNome(), quantidade};
             dfmodel.addRow(dados);
-        }        
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -61,7 +63,7 @@ public class PedidoView extends javax.swing.JDialog {
         jLabelEmail = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableProdutos = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        jButtonImprimir = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabelValor = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -70,7 +72,7 @@ public class PedidoView extends javax.swing.JDialog {
         jLabelAdiantamento = new javax.swing.JLabel();
         jLabelDataPedido = new javax.swing.JLabel();
         jLabelDataEntrega = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        jButtonFecharPedido = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -124,8 +126,8 @@ public class PedidoView extends javax.swing.JDialog {
             jTableProdutos.getColumnModel().getColumn(1).setPreferredWidth(5);
         }
 
-        jButton1.setFont(new java.awt.Font("Tw Cen MT", 1, 11)); // NOI18N
-        jButton1.setText("Imprimir");
+        jButtonImprimir.setFont(new java.awt.Font("Tw Cen MT", 1, 11)); // NOI18N
+        jButtonImprimir.setText("Imprimir");
 
         jLabel2.setFont(new java.awt.Font("Tw Cen MT", 3, 14)); // NOI18N
         jLabel2.setText("Valor:");
@@ -147,8 +149,13 @@ public class PedidoView extends javax.swing.JDialog {
 
         jLabelDataEntrega.setText("dataentrega");
 
-        jButton2.setFont(new java.awt.Font("Tw Cen MT", 1, 11)); // NOI18N
-        jButton2.setText("Fechar Pedido");
+        jButtonFecharPedido.setFont(new java.awt.Font("Tw Cen MT", 1, 11)); // NOI18N
+        jButtonFecharPedido.setText("Fechar Pedido");
+        jButtonFecharPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonFecharPedidoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -182,9 +189,9 @@ public class PedidoView extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 259, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(jButtonImprimir)
                         .addGap(23, 23, 23)
-                        .addComponent(jButton2))
+                        .addComponent(jButtonFecharPedido))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(42, 42, 42))
             .addGroup(layout.createSequentialGroup()
@@ -209,8 +216,8 @@ public class PedidoView extends javax.swing.JDialog {
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton2))
+                            .addComponent(jButtonImprimir)
+                            .addComponent(jButtonFecharPedido))
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGap(29, 29, 29)
@@ -250,9 +257,20 @@ public class PedidoView extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonFecharPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFecharPedidoActionPerformed
+        try {
+            PedidoDAO.fechaPedido(pedido.getId());
+            JOptionPane.showMessageDialog(null, "Pedido fechado");
+        } catch (Exception e) {
+            System.out.println("Pedido não pôde ser fechado...");
+        }
+        this.dispose();
+    }//GEN-LAST:event_jButtonFecharPedidoActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButtonFecharPedido;
+    private javax.swing.JButton jButtonImprimir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

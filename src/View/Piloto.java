@@ -21,8 +21,6 @@ import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import Util.Util;
 import View.Graficos.Grafico;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class Piloto extends javax.swing.JFrame {
 
@@ -68,6 +66,7 @@ public class Piloto extends javax.swing.JFrame {
         jButtonGraficoPedidos = new javax.swing.JButton();
         jLabelData = new javax.swing.JLabel();
         jLabelHora = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jMenuPiloto = new javax.swing.JMenuBar();
         jMenuCadastro = new javax.swing.JMenu();
         jMenuClientes = new javax.swing.JMenuItem();
@@ -147,25 +146,25 @@ public class Piloto extends javax.swing.JFrame {
         jButtonVisualizarVendas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sale-tag32px.png"))); // NOI18N
         jButtonVisualizarVendas.setName(""); // NOI18N
         getContentPane().add(jButtonVisualizarVendas);
-        jButtonVisualizarVendas.setBounds(360, 70, 67, 41);
+        jButtonVisualizarVendas.setBounds(280, 70, 67, 41);
 
         jButtonVisualizarPedidos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/pedido32px.png"))); // NOI18N
         getContentPane().add(jButtonVisualizarPedidos);
-        jButtonVisualizarPedidos.setBounds(430, 70, 67, 41);
+        jButtonVisualizarPedidos.setBounds(350, 70, 67, 41);
 
         jLabel6.setFont(new java.awt.Font("Tw Cen MT", 1, 14)); // NOI18N
         jLabel6.setText("Visualizar");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(400, 40, 80, 16);
+        jLabel6.setBounds(320, 40, 80, 16);
         getContentPane().add(jSeparator2);
-        jSeparator2.setBounds(340, 60, 188, 10);
+        jSeparator2.setBounds(260, 60, 188, 10);
 
         jLabel7.setFont(new java.awt.Font("Tw Cen MT", 1, 14)); // NOI18N
         jLabel7.setText("Relatórios");
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(610, 40, 90, 16);
+        jLabel7.setBounds(530, 40, 90, 16);
         getContentPane().add(jSeparator4);
-        jSeparator4.setBounds(550, 60, 188, 10);
+        jSeparator4.setBounds(470, 60, 188, 10);
 
         jButtonRelatorioVendas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sale-tag32px.png"))); // NOI18N
         jButtonRelatorioVendas.addActionListener(new java.awt.event.ActionListener() {
@@ -174,18 +173,18 @@ public class Piloto extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButtonRelatorioVendas);
-        jButtonRelatorioVendas.setBounds(570, 70, 67, 41);
+        jButtonRelatorioVendas.setBounds(490, 70, 67, 41);
 
         jButtonRelatorioPedidos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/pedido32px.png"))); // NOI18N
         getContentPane().add(jButtonRelatorioPedidos);
-        jButtonRelatorioPedidos.setBounds(640, 70, 67, 41);
+        jButtonRelatorioPedidos.setBounds(560, 70, 67, 41);
 
         jLabel8.setFont(new java.awt.Font("Tw Cen MT", 1, 14)); // NOI18N
         jLabel8.setText("Gráficos");
         getContentPane().add(jLabel8);
-        jLabel8.setBounds(830, 40, 70, 16);
+        jLabel8.setBounds(740, 40, 60, 16);
         getContentPane().add(jSeparator5);
-        jSeparator5.setBounds(760, 60, 182, 10);
+        jSeparator5.setBounds(680, 60, 182, 10);
 
         jButtonGraficoVendas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sale-tag32px.png"))); // NOI18N
         jButtonGraficoVendas.addActionListener(new java.awt.event.ActionListener() {
@@ -194,7 +193,7 @@ public class Piloto extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButtonGraficoVendas);
-        jButtonGraficoVendas.setBounds(780, 70, 67, 40);
+        jButtonGraficoVendas.setBounds(700, 70, 67, 40);
 
         jButtonGraficoPedidos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/pedido32px.png"))); // NOI18N
         jButtonGraficoPedidos.addActionListener(new java.awt.event.ActionListener() {
@@ -203,7 +202,7 @@ public class Piloto extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButtonGraficoPedidos);
-        jButtonGraficoPedidos.setBounds(850, 70, 67, 40);
+        jButtonGraficoPedidos.setBounds(770, 70, 67, 40);
 
         jLabelData.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelData.setBorder(javax.swing.BorderFactory.createCompoundBorder());
@@ -213,6 +212,15 @@ public class Piloto extends javax.swing.JFrame {
         jLabelHora.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         getContentPane().add(jLabelHora);
         jLabelHora.setBounds(910, 590, 80, 50);
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/money.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1);
+        jButton1.setBounds(950, 70, 70, 40);
 
         jMenuPiloto.setBackground(new java.awt.Color(255, 255, 255));
         jMenuPiloto.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -391,6 +399,11 @@ public class Piloto extends javax.swing.JFrame {
         pv.setVisible(true);
     }//GEN-LAST:event_jListPedidosFazerMouseClicked
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Caixa caixa = new Caixa(this, true);
+        caixa.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     private void preencherListaPedidosHoje() {
         try {
             pedidosHoje = new ArrayList<>(PedidoDAO.pedidosHoje());
@@ -447,6 +460,7 @@ public class Piloto extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private Controller.Conexao conexao1;
     private Controller.Conexao conexao2;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonGraficoPedidos;
     private javax.swing.JButton jButtonGraficoVendas;
     private javax.swing.JButton jButtonRelatorioPedidos;
