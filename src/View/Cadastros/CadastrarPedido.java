@@ -253,7 +253,7 @@ public class CadastrarPedido extends javax.swing.JDialog {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true
+                false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -590,9 +590,10 @@ public class CadastrarPedido extends javax.swing.JDialog {
         jTableCompras.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                int linha = jTableCompras.getSelectedRow();
-                int coluna = jTableCompras.getSelectedColumn();
                 if (e.getClickCount() == 2) {
+                    int linha = jTableCompras.getSelectedRow();
+                    int coluna = jTableCompras.getSelectedColumn();
+                    System.out.println(linha + " " + coluna);
                     Object valorCell = jTableCompras.getModel().getValueAt(linha, coluna);
                     String s = (String) valorCell;
                     String[] partes = s.split("");
@@ -613,8 +614,6 @@ public class CadastrarPedido extends javax.swing.JDialog {
             }
 
         });
-
-
     }//GEN-LAST:event_jTableComprasMouseClicked
 
     private void jRadioButtonQuitadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonQuitadoActionPerformed
@@ -666,9 +665,9 @@ public class CadastrarPedido extends javax.swing.JDialog {
     }
 
     private void atualizarValor(int linha, int coluna) {
-        valorTotal = 0;
-        Produto produto = produtos.get(this.jComboBoxListaProdutos.getSelectedIndex());
         Object valorCell = jTableCompras.getModel().getValueAt(linha, coluna);
+        Produto produto = produtos.get(this.jComboBoxListaProdutos.getSelectedIndex());
+
         valorTotal += (double) (produto.getValorVenda() * Double.parseDouble((String) valorCell));
         this.jLabelValorTotal.setText(Util.formatarValor(valorTotal));
     }

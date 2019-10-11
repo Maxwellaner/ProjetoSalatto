@@ -21,11 +21,14 @@ import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import Util.Util;
 import View.Graficos.Grafico;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Piloto extends javax.swing.JFrame {
 
     private List<Pedido> pedidosHoje;
     private List<Pedido> pedidosFazer;
+    Pedido pedido = new Pedido();
 
     public Piloto() {
         initComponents();
@@ -65,7 +68,6 @@ public class Piloto extends javax.swing.JFrame {
         jButtonGraficoPedidos = new javax.swing.JButton();
         jLabelData = new javax.swing.JLabel();
         jLabelHora = new javax.swing.JLabel();
-        jButtonAbrirPedido = new javax.swing.JButton();
         jMenuPiloto = new javax.swing.JMenuBar();
         jMenuCadastro = new javax.swing.JMenu();
         jMenuClientes = new javax.swing.JMenuItem();
@@ -83,7 +85,7 @@ public class Piloto extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Salatto");
-        setPreferredSize(new java.awt.Dimension(1000, 700));
+        setPreferredSize(new java.awt.Dimension(1070, 700));
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
@@ -97,10 +99,15 @@ public class Piloto extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        jListPedidosHoje.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jListPedidosHojeMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jListPedidosHoje);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(57, 205, 422, 318);
+        jScrollPane1.setBounds(57, 205, 422, 390);
 
         jLabel1.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
         jLabel1.setText("Pedidos do dia");
@@ -127,10 +134,15 @@ public class Piloto extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        jListPedidosFazer.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jListPedidosFazerMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jListPedidosFazer);
 
         getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(518, 205, 420, 318);
+        jScrollPane2.setBounds(518, 205, 490, 390);
 
         jButtonVisualizarVendas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sale-tag32px.png"))); // NOI18N
         jButtonVisualizarVendas.setName(""); // NOI18N
@@ -201,15 +213,6 @@ public class Piloto extends javax.swing.JFrame {
         jLabelHora.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         getContentPane().add(jLabelHora);
         jLabelHora.setBounds(910, 590, 80, 50);
-
-        jButtonAbrirPedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/abrir-pasta-com-documento.png"))); // NOI18N
-        jButtonAbrirPedido.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAbrirPedidoActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButtonAbrirPedido);
-        jButtonAbrirPedido.setBounds(440, 550, 40, 40);
 
         jMenuPiloto.setBackground(new java.awt.Color(255, 255, 255));
         jMenuPiloto.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -358,16 +361,35 @@ public class Piloto extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void jButtonGraficoVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGraficoVendasActionPerformed
-        
+
     }//GEN-LAST:event_jButtonGraficoVendasActionPerformed
 
     private void jButtonGraficoPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGraficoPedidosActionPerformed
         Grafico.graficoPizza();
     }//GEN-LAST:event_jButtonGraficoPedidosActionPerformed
 
-    private void jButtonAbrirPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAbrirPedidoActionPerformed
-        
-    }//GEN-LAST:event_jButtonAbrirPedidoActionPerformed
+    private void jListPedidosHojeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListPedidosHojeMouseClicked
+        /*jListPedidosHoje.addMouseListener(new MouseAdapter() {         
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    pedido = pedidosHoje.get(jListPedidosHoje.getSelectedIndex());
+                    System.out.println("chegou aqui");
+                }
+            } 
+        });*/
+        pedidosHoje = new ArrayList<>(PedidoDAO.pedidosHoje());
+        pedido = pedidosHoje.get(jListPedidosHoje.getSelectedIndex());
+        PedidoView pv = new PedidoView(this, true, pedido);
+        pv.setVisible(true);
+    }//GEN-LAST:event_jListPedidosHojeMouseClicked
+
+    private void jListPedidosFazerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListPedidosFazerMouseClicked
+        pedidosFazer = new ArrayList<>(PedidoDAO.pedidosFazer());
+        pedido = pedidosFazer.get(jListPedidosFazer.getSelectedIndex());
+        PedidoView pv = new PedidoView(this, true, pedido);
+        pv.setVisible(true);
+    }//GEN-LAST:event_jListPedidosFazerMouseClicked
 
     private void preencherListaPedidosHoje() {
         try {
@@ -408,6 +430,7 @@ public class Piloto extends javax.swing.JFrame {
     }
 
     class hora implements ActionListener {
+
         @Override
         public void actionPerformed(ActionEvent e) {
             Calendar calendario = Calendar.getInstance();
@@ -420,11 +443,10 @@ public class Piloto extends javax.swing.JFrame {
             new Piloto().setVisible(true);
         });
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private Controller.Conexao conexao1;
     private Controller.Conexao conexao2;
-    private javax.swing.JButton jButtonAbrirPedido;
     private javax.swing.JButton jButtonGraficoPedidos;
     private javax.swing.JButton jButtonGraficoVendas;
     private javax.swing.JButton jButtonRelatorioPedidos;

@@ -1,22 +1,49 @@
 package View;
 
 import Model.Pedido;
+import Model.Produto;
+import javax.swing.table.DefaultTableModel;
 
 public class PedidoView extends javax.swing.JDialog {
 
     private Pedido pedido;
-    
+
     public PedidoView(java.awt.Frame parent, boolean modal, Pedido pedido) {
         super(parent, modal);
         initComponents();
         this.pedido = pedido;
+        this.setLocationRelativeTo(null);
         preencherView();
     }
-    
+
     private void preencherView() {
+        this.jLabelNumPedido.setText(Integer.toString(pedido.getId()));
+        this.jLabelDataPedido.setText(pedido.getDataPedido().toString());
+        this.jLabelDataEntrega.setText(pedido.getDataEntrega().toString());
+        this.jLabelValor.setText(Double.toString(pedido.getValorTotal()));
+        this.jLabelAdiantamento.setText(Double.toString(pedido.getAdiantamento()));
+
+        if (pedido.getEmpresa() != null) {
+            this.jLabelEndereco.setText(pedido.getEmpresa().getEndereco());
+            this.jLabelEmail.setText(pedido.getEmpresa().getEmailComercial());
+            this.jLabelNome.setText(pedido.getEmpresa().getNomeFantasia());
+            this.jLabelContato.setText(pedido.getEmpresa().getCelularComercial() + "/" + pedido.getEmpresa().getTelefoneComercial());
+        } else {
+            this.jLabelEndereco.setText(pedido.getCliente().getEndereco());
+            this.jLabelEmail.setText(pedido.getCliente().getEmail());
+            this.jLabelNome.setText(pedido.getCliente().getNome());
+            this.jLabelContato.setText(pedido.getCliente().getCelular() + "/" + pedido.getCliente().getTelefone());
+        }
+        DefaultTableModel dfmodel = (DefaultTableModel) jTableProdutos.getModel();
         
+        for (int i = 0; i < pedido.getProdutos().size(); i++) {
+            Produto produto = pedido.getProdutos().get(i);
+            Object quantidade = pedido.getProdutos().get(i).getQuantidadePorPedido();
+            Object[] dados = {produto.getNome(), quantidade};
+            dfmodel.addRow(dados);
+        }        
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -43,6 +70,7 @@ public class PedidoView extends javax.swing.JDialog {
         jLabelAdiantamento = new javax.swing.JLabel();
         jLabelDataPedido = new javax.swing.JLabel();
         jLabelDataEntrega = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -119,6 +147,9 @@ public class PedidoView extends javax.swing.JDialog {
 
         jLabelDataEntrega.setText("dataentrega");
 
+        jButton2.setFont(new java.awt.Font("Tw Cen MT", 1, 11)); // NOI18N
+        jButton2.setText("Fechar Pedido");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -148,14 +179,13 @@ public class PedidoView extends javax.swing.JDialog {
                     .addComponent(jLabelDataPedido)
                     .addComponent(jLabelDataEntrega)
                     .addComponent(jLabelValor))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 259, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(54, 149, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
+                        .addComponent(jButton1)
+                        .addGap(23, 23, 23)
+                        .addComponent(jButton2))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(42, 42, 42))
             .addGroup(layout.createSequentialGroup()
                 .addGap(426, 426, 426)
@@ -178,7 +208,9 @@ public class PedidoView extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                        .addComponent(jButton1)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton1)
+                            .addComponent(jButton2))
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGap(29, 29, 29)
@@ -220,6 +252,7 @@ public class PedidoView extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
