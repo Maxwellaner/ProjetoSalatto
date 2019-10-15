@@ -357,9 +357,11 @@ public class PedidoDAO {
         Date hoje = Util.dataAtual();
         List<Pedido> pedidos = new ArrayList<>();
         try {
-            conn = Conexao.conectar();
+            String sql = "SELECT * FROM pedidos WHERE dataFechamento=? AND status='FECHADO'";//+ hoje + " ORDER BY dataEntrega ASC";
+            conn = Conexao.conectar();   
             comando = conn.prepareStatement("SELECT * FROM pedidos WHERE dataFechamento=? AND status='FECHADO'");
             comando.setDate(1, hoje);
+            System.out.println(comando);
             rs = comando.executeQuery();
 
             while (rs.next()) {
@@ -375,12 +377,24 @@ public class PedidoDAO {
 
                 pedidos.add(p);
             }
-            System.out.println(pedidos);
+            
+            for (int i = 0; i <= pedidos.size() - 1; i++) {
+
+                if (pedidos.get(i).getIdCliente() != 0) {
+                    pedidos.get(i).setCliente(clientePedido(pedidos.get(i).getIdCliente()));
+                } else {
+                    pedidos.get(i).setEmpresa(empresaPedido(pedidos.get(i).getIdEmpresa()));
+                }
+                pedidos.get(i).setProdutos(produtosPedido(pedidos.get(i).getId()));
+            }
+            
+            
         } catch (Exception e) {
             System.out.println("Não foi possível buscar os pedidos fechados hoje");
         } finally {
             Conexao.fecharConexao(conn, comando, rs);
         }
+        System.out.println(pedidos);
         return pedidos;
     }
 }

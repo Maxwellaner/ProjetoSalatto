@@ -1,5 +1,6 @@
 package View;
 
+import Controller.DespesasDAO;
 import Controller.PedidoDAO;
 import Model.Pedido;
 import java.util.List;
@@ -13,7 +14,10 @@ import javax.swing.DefaultListModel;
 public class Caixa extends javax.swing.JDialog {
 
     private List<Pedido> pedidos;
-    
+    private double valorTotal;
+    private double despesas;
+    private double lucro;
+
     public Caixa(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -21,16 +25,9 @@ public class Caixa extends javax.swing.JDialog {
         this.jLabelDataAtual.setText(Util.dataAtualFormatada());
         preencherListaPedidos();
         informacoes();
+        exibir();
     }
 
-    public List<Pedido> getPedidos() {
-        return pedidos;
-    }
-
-    public void setPedidos(List<Pedido> pedidos) {
-        this.pedidos = pedidos;
-    }
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -49,6 +46,7 @@ public class Caixa extends javax.swing.JDialog {
         jLabelDataAtual = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Tw Cen MT", 1, 48)); // NOI18N
         jLabel1.setText("Caixa");
@@ -98,8 +96,7 @@ public class Caixa extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabelValorTotal)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonFecharCaixa)
-                        .addGap(62, 62, 62))
+                        .addComponent(jButtonFecharCaixa))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 483, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -112,7 +109,8 @@ public class Caixa extends javax.swing.JDialog {
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabelLucro)))
-                        .addContainerGap(159, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)))
+                .addGap(62, 62, 62))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jSeparator1)
@@ -171,7 +169,6 @@ public class Caixa extends javax.swing.JDialog {
     private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
 
-    // TO DO: Arrumar este método que esta retornando nullException
     private void preencherListaPedidos() {
         try {
             pedidos = new ArrayList<>(PedidoDAO.pedidosFechadosHoje());
@@ -192,6 +189,24 @@ public class Caixa extends javax.swing.JDialog {
     }
 
     private void informacoes() {
-        // TO DO: Calcular e mostrar na tela todas as outras informações
+
+        double valor = 0;
+        for (int i = 0; i < pedidos.size(); i++) {
+            Pedido pedido = pedidos.get(i);
+            double valorPedido = pedido.getValorTotal();
+            valor += valorPedido;
+        }
+        valorTotal = valor;
+        
+        despesas = DespesasDAO.despesaDoDia();
+        
+        double lucroDiario = valorTotal - despesas;
+        lucro = lucroDiario;
+    }
+
+    private void exibir() {
+        this.jLabelValorTotal.setText(Util.formatarValor(valorTotal));
+        this.jLabelLucro.setText(Util.formatarValor(lucro));
+        this.jLabelDespesas.setText(Util.formatarValor(despesas));
     }
 }
