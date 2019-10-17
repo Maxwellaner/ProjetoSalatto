@@ -22,7 +22,12 @@ public class PedidoDAO {
     private static List<Produto> listaProdutos;
     private static List quantidadeProdutos;
 
-    
+    /**
+     * Método para cadastrar os pedidos.
+     * @param pedido
+     * @param produtos
+     * @param quantidade 
+     */
     public static void cadastrarPedido(Pedido pedido, List<Produto> produtos, List quantidade) {
 
         listaProdutos = produtos;
@@ -95,6 +100,9 @@ public class PedidoDAO {
         }
     }
 
+    /**
+     * Método para dar baixa nos produtos.
+     */
     private static void darBaixa() {
 
         Connection conn = null;
@@ -117,6 +125,10 @@ public class PedidoDAO {
         }
     }
 
+    /**
+     * Método que lista todos os pedidos do dia.
+     * @return - lista com os pedidos do dia.
+     */
     public static List<Pedido> pedidosHoje() {
         Connection conn = null;
         PreparedStatement comando = null;
@@ -162,6 +174,11 @@ public class PedidoDAO {
         return listaPedidos;
     }
 
+    /**
+     * Método de apoio para buscar e adicionar o cliente ao pedido.
+     * @param i
+     * @return - retorna o cliente referente.
+     */
     private static Cliente clientePedido(int i) {
         String sql = "SELECT * FROM clientes WHERE id=" + i;
         Connection conn = null;
@@ -190,6 +207,11 @@ public class PedidoDAO {
         return c;
     }
 
+    /**
+     * Método de apoio para adicionar a empresa ao pedido.
+     * @param i
+     * @return - retorna a empresa referente.
+     */
     private static Empresa empresaPedido(int i) {
         String sql = "SELECT * FROM empresas WHERE id=" + i;
         Connection conn = null;
@@ -219,6 +241,11 @@ public class PedidoDAO {
         return e;
     }
 
+    /**
+     * Método de apoio para adicionar os produtos do pedido.
+     * @param i
+     * @return - retorna uma lista com os produtos referentes.
+     */
     public static List<Produto> produtosPedido(int i) {
         Connection conn = null;
         PreparedStatement comando = null;
@@ -270,6 +297,10 @@ public class PedidoDAO {
         return listaProdutos;
     }
 
+    /**
+     * Método para listar os pedidos a fazer à partir da data atual.
+     * @return - retorna uma lista com os pedidos a fazer.
+     */
     public static List<Pedido> pedidosFazer() {
         Connection conn = null;
         PreparedStatement comando = null;
@@ -313,6 +344,10 @@ public class PedidoDAO {
         return listaPedidos;
     }
 
+    /**
+     * Método para fechar o pedido, ou seja, status = FECHADO.
+     * @param indice 
+     */
     public static void fechaPedido(int indice) {
         System.out.println(indice);
         Connection conn = null;
@@ -335,6 +370,10 @@ public class PedidoDAO {
         }
     }
 
+    /**
+     * Método para listar os pedidos fechados na data atual.
+     * @return - retorna uma lista com os pedidos.
+     */
     public static List<Pedido> pedidosFechadosHoje() {
         Connection conn = null;
         PreparedStatement comando = null;
@@ -381,7 +420,12 @@ public class PedidoDAO {
         return pedidos;
     }
     
-    public static List<Pedido> pedidoPorData(String s) {
+    /**
+     * Método que retorna um pedido pela data de fechamento.
+     * @param s
+     * @return - retorna uma lista com os pedidos.
+     */
+    public static List<Pedido> pedidoPorDataFechamento(String s) {
         Connection conn = null;
         PreparedStatement comando = null;
         ResultSet rs = null;
@@ -426,6 +470,10 @@ public class PedidoDAO {
         return listaPedidos;
     }
     
+    /**
+     * Método para listar todos os pedidos do banco de dados
+     * @return - uma lista com todos os pedidos
+     */
     public static List<Pedido> pedidos() {
         Connection conn = null;
         PreparedStatement comando = null;

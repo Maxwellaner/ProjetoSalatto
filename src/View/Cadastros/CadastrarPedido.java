@@ -599,21 +599,22 @@ public class CadastrarPedido extends javax.swing.JDialog {
                     String[] partes = s.split("");
                     int index = Integer.parseInt(partes[0]);
                     Produto produto = null;
+                    int indiceProduto = 0;
                     for (int i = 0; i <= produtos.size() - 1; i++) {
                         if (produtos.get(i).getId() == index) {
                             produto = produtos.get(i);
+                            indiceProduto = i;
                         }
                     }
-                    Object quantidade = jTableCompras.getModel().getValueAt(linha, 1);
+                    Object qnt = jTableCompras.getModel().getValueAt(linha, 1);
                     listaCompras.remove(produto);
-                    valorTotal = (double) valorTotal - (produto.getValorVenda() * Double.parseDouble((String) quantidade));
+                    quantidade.remove(quantidade.get(indiceProduto));
+                    valorTotal = (double) valorTotal - (produto.getValorVenda() * Double.parseDouble((String) qnt));
                     DefaultTableModel dfmodel = (DefaultTableModel) jTableCompras.getModel();
                     dfmodel.removeRow(linha);
                 }
-
             }
-
-        });
+        });    
     }//GEN-LAST:event_jTableComprasMouseClicked
 
     private void jRadioButtonQuitadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonQuitadoActionPerformed

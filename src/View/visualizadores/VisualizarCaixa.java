@@ -163,7 +163,7 @@ public class VisualizarCaixa extends javax.swing.JDialog {
 
     private void preencherListaPedidos(String data) {
         try {
-            pedidos = new ArrayList<>(PedidoDAO.pedidoPorData(data));
+            pedidos = new ArrayList<>(PedidoDAO.pedidoPorDataFechamento(data));
             DefaultListModel dfmodel = new DefaultListModel();
             this.jListPedidosFechados.setModel(dfmodel);
             pedidos.forEach((p) -> {
