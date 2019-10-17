@@ -1,16 +1,17 @@
-package View;
+package View.visualizadores;
 
+import View.*;
 import Controller.PedidoDAO;
 import Model.Pedido;
 import Model.Produto;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-public class PedidoView extends javax.swing.JDialog {
+public class VisualizarPedido extends javax.swing.JDialog {
 
     private final Pedido pedido;
 
-    public PedidoView(java.awt.Frame parent, boolean modal, Pedido pedido) {
+    public VisualizarPedido(java.awt.Frame parent, boolean modal, Pedido pedido) {
         super(parent, modal);
         initComponents();
         this.pedido = pedido;
@@ -72,7 +73,6 @@ public class PedidoView extends javax.swing.JDialog {
         jLabelAdiantamento = new javax.swing.JLabel();
         jLabelDataPedido = new javax.swing.JLabel();
         jLabelDataEntrega = new javax.swing.JLabel();
-        jButtonFecharPedido = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -149,14 +149,6 @@ public class PedidoView extends javax.swing.JDialog {
 
         jLabelDataEntrega.setText("dataentrega");
 
-        jButtonFecharPedido.setFont(new java.awt.Font("Tw Cen MT", 1, 11)); // NOI18N
-        jButtonFecharPedido.setText("Fechar Pedido");
-        jButtonFecharPedido.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonFecharPedidoActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -165,41 +157,41 @@ public class PedidoView extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jSeparator1)
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelNome)
-                    .addComponent(jLabelEndereco)
-                    .addComponent(jLabelContato)
-                    .addComponent(jLabelEmail)
-                    .addComponent(jLabelAdiantamento)
-                    .addComponent(jLabelDataPedido)
-                    .addComponent(jLabelDataEntrega)
-                    .addComponent(jLabelValor))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 259, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButtonImprimir)
-                        .addGap(23, 23, 23)
-                        .addComponent(jButtonFecharPedido))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42))
             .addGroup(layout.createSequentialGroup()
                 .addGap(426, 426, 426)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelNumPedido)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonImprimir))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelNome)
+                            .addComponent(jLabelEndereco)
+                            .addComponent(jLabelContato)
+                            .addComponent(jLabelEmail)
+                            .addComponent(jLabelAdiantamento)
+                            .addComponent(jLabelDataPedido)
+                            .addComponent(jLabelDataEntrega)
+                            .addComponent(jLabelValor))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 259, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(42, 42, 42))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -215,9 +207,7 @@ public class PedidoView extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButtonImprimir)
-                            .addComponent(jButtonFecharPedido))
+                        .addComponent(jButtonImprimir)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGap(29, 29, 29)
@@ -258,18 +248,7 @@ public class PedidoView extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonFecharPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFecharPedidoActionPerformed
-        try {
-            PedidoDAO.fechaPedido(pedido.getId());
-            JOptionPane.showMessageDialog(null, "Pedido fechado");
-        } catch (Exception e) {
-            System.out.println("Pedido não pôde ser fechado...");
-        }
-        this.dispose();
-    }//GEN-LAST:event_jButtonFecharPedidoActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonFecharPedido;
     private javax.swing.JButton jButtonImprimir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

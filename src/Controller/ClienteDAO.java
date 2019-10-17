@@ -23,9 +23,12 @@ public class ClienteDAO {
             Cliente c = new Cliente();
             c.setId(consulta.getInt("id"));
             c.setNome(consulta.getString("nome"));
+            c.setCPF(consulta.getString("cpf"));
+            c.setEmail(consulta.getString("email"));
             c.setEndereco(consulta.getString("endereco"));
             c.setCelular(consulta.getString("celular"));
             c.setNascimento(consulta.getDate("nascimento"));
+            c.setTelefone(consulta.getString("telefone"));
             listaClientes.add(c);
         }
 

@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import Util.Util;
 import View.Graficos.Grafico;
+import View.visualizadores.listas.listaClientes;
+import View.visualizadores.listas.listaEmpresas;
 
 public class Piloto extends javax.swing.JFrame {
 
@@ -62,6 +64,7 @@ public class Piloto extends javax.swing.JFrame {
         jListPedidosFazer = new javax.swing.JList<>();
         jLabelData = new javax.swing.JLabel();
         jLabelHora = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
         jMenuPiloto = new javax.swing.JMenuBar();
         jMenuCadastro = new javax.swing.JMenu();
         jMenuClientes = new javax.swing.JMenuItem();
@@ -77,6 +80,9 @@ public class Piloto extends javax.swing.JFrame {
         jMenuLancamentos = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItemVisualizarClientes = new javax.swing.JMenuItem();
+        jMenuItemVisualizarEmpresas = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Salatto");
@@ -188,9 +194,9 @@ public class Piloto extends javax.swing.JFrame {
                 .addComponent(jButtonVisualizarVendas)
                 .addGap(14, 14, 14)
                 .addComponent(jButtonVisualizarPedidos)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jButtonRelatorioVendas)
-                .addGap(22, 22, 22)
+                .addGap(14, 14, 14)
                 .addComponent(jButtonGraficoPedidos)
                 .addGap(18, 18, 18)
                 .addComponent(jButtonGraficoVendas)
@@ -203,15 +209,14 @@ public class Piloto extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(31, 31, 31)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButtonGraficoVendas)
                     .addComponent(jButtonRelatorioPedidos)
                     .addComponent(jButtonGraficoPedidos)
                     .addComponent(jButtonRelatorioVendas)
                     .addComponent(jButtonVisualizarPedidos)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(jButtonVisualizarVendas)))
+                    .addComponent(jButtonVisualizarVendas))
                 .addContainerGap(42, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -256,6 +261,13 @@ public class Piloto extends javax.swing.JFrame {
         jLabelData.setBorder(javax.swing.BorderFactory.createCompoundBorder());
 
         jLabelHora.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/botao-de-atualizacao.png"))); // NOI18N
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jMenuPiloto.setBackground(new java.awt.Color(255, 255, 255));
         jMenuPiloto.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -355,6 +367,26 @@ public class Piloto extends javax.swing.JFrame {
 
         jMenuPiloto.add(jMenuLancamentos);
 
+        jMenu3.setText("Visualizar");
+
+        jMenuItemVisualizarClientes.setText("Clientes");
+        jMenuItemVisualizarClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemVisualizarClientesActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItemVisualizarClientes);
+
+        jMenuItemVisualizarEmpresas.setText("Empresas");
+        jMenuItemVisualizarEmpresas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemVisualizarEmpresasActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItemVisualizarEmpresas);
+
+        jMenuPiloto.add(jMenu3);
+
         setJMenuBar(jMenuPiloto);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -362,7 +394,23 @@ public class Piloto extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 951, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(270, 270, 270)
+                                        .addComponent(jLabel2))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addGap(344, 344, 344)
+                                        .addComponent(jLabel4)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(131, 131, 131))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(61, 61, 61)
                         .addComponent(jLabel5)
@@ -370,9 +418,6 @@ public class Piloto extends javax.swing.JFrame {
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(327, 327, 327)
-                        .addComponent(jLabel2))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(57, 57, 57)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -384,16 +429,8 @@ public class Piloto extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(302, 302, 302)
                                 .addComponent(jLabelData, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(57, 57, 57)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 951, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(344, 344, 344)
-                                .addComponent(jLabel4)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -411,12 +448,17 @@ public class Piloto extends javax.swing.JFrame {
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6)
-                .addComponent(jLabel2)
-                .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel4))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel2)
+                        .addGap(6, 6, 6)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel4)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -502,14 +544,14 @@ public class Piloto extends javax.swing.JFrame {
         });*/
         pedidosHoje = new ArrayList<>(PedidoDAO.pedidosHoje());
         pedido = pedidosHoje.get(jListPedidosHoje.getSelectedIndex());
-        PedidoView pv = new PedidoView(this, true, pedido);
+        PedidoFechar pv = new PedidoFechar(this, true, pedido);
         pv.setVisible(true);
     }//GEN-LAST:event_jListPedidosHojeMouseClicked
 
     private void jListPedidosFazerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListPedidosFazerMouseClicked
         pedidosFazer = new ArrayList<>(PedidoDAO.pedidosFazer());
         pedido = pedidosFazer.get(jListPedidosFazer.getSelectedIndex());
-        PedidoView pv = new PedidoView(this, true, pedido);
+        PedidoFechar pv = new PedidoFechar(this, true, pedido);
         pv.setVisible(true);
     }//GEN-LAST:event_jListPedidosFazerMouseClicked
 
@@ -524,8 +566,23 @@ public class Piloto extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jButtonRelatorioPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRelatorioPedidosActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jButtonRelatorioPedidosActionPerformed
+
+    private void jMenuItemVisualizarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemVisualizarClientesActionPerformed
+        listaClientes lc = new listaClientes(this, true);
+        lc.setVisible(true);
+    }//GEN-LAST:event_jMenuItemVisualizarClientesActionPerformed
+
+    private void jMenuItemVisualizarEmpresasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemVisualizarEmpresasActionPerformed
+        listaEmpresas le = new listaEmpresas(this, true);
+        le.setVisible(true);
+    }//GEN-LAST:event_jMenuItemVisualizarEmpresasActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        preencherListaPedidosHoje();
+        preencherListaPedidosFazer();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void preencherListaPedidosHoje() {
         try {
@@ -584,6 +641,7 @@ public class Piloto extends javax.swing.JFrame {
     private Controller.Conexao conexao1;
     private Controller.Conexao conexao2;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonGraficoPedidos;
     private javax.swing.JButton jButtonGraficoVendas;
     private javax.swing.JButton jButtonRelatorioPedidos;
@@ -601,6 +659,7 @@ public class Piloto extends javax.swing.JFrame {
     private javax.swing.JList<String> jListPedidosHoje;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenuCadastro;
     private javax.swing.JMenuItem jMenuCadastroEmpresa;
     private javax.swing.JMenuItem jMenuClientes;
@@ -610,6 +669,8 @@ public class Piloto extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItemVisualizarClientes;
+    private javax.swing.JMenuItem jMenuItemVisualizarEmpresas;
     private javax.swing.JMenu jMenuLancamentos;
     private javax.swing.JMenuItem jMenuMateriaPrima;
     private javax.swing.JMenuBar jMenuPiloto;
