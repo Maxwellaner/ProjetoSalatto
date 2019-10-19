@@ -481,7 +481,7 @@ public class PedidoDAO {
         List<Pedido> listaPedidos = new ArrayList<Pedido>();
         try {
             conn = Conexao.conectar();
-            comando = conn.prepareStatement("SELECT * FROM pedidos");
+            comando = conn.prepareStatement("SELECT * FROM pedidos ORDER BY id");
             rs = comando.executeQuery();
 
             while (rs.next()) {

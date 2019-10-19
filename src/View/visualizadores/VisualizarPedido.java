@@ -1,10 +1,7 @@
 package View.visualizadores;
 
-import View.*;
-import Controller.PedidoDAO;
 import Model.Pedido;
 import Model.Produto;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class VisualizarPedido extends javax.swing.JDialog {
