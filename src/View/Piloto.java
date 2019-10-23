@@ -24,6 +24,7 @@ import View.Graficos.Grafico;
 import View.visualizadores.listas.listaClientes;
 import View.visualizadores.listas.listaEmpresas;
 import View.visualizadores.listas.listaPedidos;
+import View.visualizadores.listas.listaProdutos;
 
 public class Piloto extends javax.swing.JFrame {
 
@@ -87,6 +88,7 @@ public class Piloto extends javax.swing.JFrame {
         jMenuItemVisualizarClientes = new javax.swing.JMenuItem();
         jMenuItemVisualizarEmpresas = new javax.swing.JMenuItem();
         jMenuItemVisualizarPedidos = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Salatto");
@@ -418,6 +420,15 @@ public class Piloto extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItemVisualizarPedidos);
 
+        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/torta.png"))); // NOI18N
+        jMenuItem3.setText("Produtos");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem3);
+
         jMenuPiloto.add(jMenu3);
 
         setJMenuBar(jMenuPiloto);
@@ -640,6 +651,11 @@ public class Piloto extends javax.swing.JFrame {
         caixa.setVisible(true);
     }//GEN-LAST:event_jMenuItemCaixaActionPerformed
 
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        listaProdutos lp = new listaProdutos(this, true);
+        lp.setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
     private void preencherListaPedidosHoje() {
         try {
             pedidosHoje = new ArrayList<>(PedidoDAO.pedidosHoje());
@@ -722,6 +738,7 @@ public class Piloto extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuClientes;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;

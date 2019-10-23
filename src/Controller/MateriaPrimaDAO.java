@@ -73,7 +73,38 @@ public class MateriaPrimaDAO {
         return listaMateriaPrima;    
     }
     
-    public static void baixaMaterialEstoque(int quantidade) {
+    public static void baixaMaterialEstoque(int quantidade, int idMaterial) {
+        Connection conn = null;
+        PreparedStatement comando = null;
         
+        try{
+            conn = Conexao.conectar();
+            comando = conn.prepareStatement("UPDATE materiaprima SET quantidadeEstoque=quantidadeEstoque - ? WHERE id=?");
+            comando.setInt(1, quantidade);
+            comando.setInt(2, idMaterial);  
+            comando.executeUpdate();
+        } catch (Exception ex) {
+            System.out.println("Erro ao dar baixa em Material");
+        } finally {
+            Conexao.fecharConexao(conn, comando);
+        }
+    }
+    
+    public static void lancarMaterialEstoque(int quantidade, int idMaterial) {
+        Connection conn = null;
+        PreparedStatement comando = null;
+        
+        try{
+            conn = Conexao.conectar();
+            comando = conn.prepareStatement("UPDATE materiaprima SET quantidadeEstoque=quantidadeEstoque+?"
+                    + " WHERE id=?");
+            comando.setInt(1, quantidade);
+            comando.setInt(2, idMaterial);
+            comando.executeUpdate();
+        } catch (Exception ex) {
+            System.out.println("Erro ao lançar Material em estoque");
+        } finally {
+            Conexao.fecharConexao(conn);
+        }
     }
 }

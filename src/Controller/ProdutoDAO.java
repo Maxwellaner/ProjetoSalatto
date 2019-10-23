@@ -91,6 +91,8 @@ public class ProdutoDAO {
             comando.executeUpdate();
         } catch (Exception ex) {
             System.out.println("Erro ao dar baixa em Produto");
+        } finally {
+            Conexao.fecharConexao(conn, comando);
         }
     }
     
@@ -107,6 +109,25 @@ public class ProdutoDAO {
             comando.executeUpdate();
         } catch (Exception ex) {
             System.out.println("Erro ao lançar Produto em estoque");
+        } finally {
+            Conexao.fecharConexao(conn);
+        }
+    }
+    
+    public static void excluir(int id) {
+        Connection conn = null;
+        PreparedStatement comando = null;
+        
+        try{
+            conn = Conexao.conectar();
+            comando = conn.prepareStatement("DELETE FROM produtos WHERE id=?");
+            comando.setInt(1, id);
+            System.out.println(comando);
+            comando.executeUpdate();
+        } catch (Exception ex) {
+            System.out.println("Erro ao deletar Produto");
+        } finally {
+            Conexao.fecharConexao(conn, comando);
         }
     }
 }

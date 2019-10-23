@@ -104,6 +104,11 @@ public class Lancamentos extends javax.swing.JDialog {
         });
 
         jButtonBaixaMaterial.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/right-arrow.png"))); // NOI18N
+        jButtonBaixaMaterial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBaixaMaterialActionPerformed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Tw Cen MT", 1, 14)); // NOI18N
         jLabel6.setText("Produto");
@@ -302,7 +307,19 @@ public class Lancamentos extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonLancamentoMeterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLancamentoMeterialActionPerformed
-
+        try {
+            int quantidade = Integer.parseInt(this.jTextFieldQntLancMaterial.getText());
+            MateriaPrima mp = materiais.get(this.jComboBoxMateriaPrima.getSelectedIndex());
+            int idMaterial = mp.getId();
+            MateriaPrimaDAO.lancarMaterialEstoque(quantidade, idMaterial);
+            JOptionPane.showMessageDialog(null, "Lançado com sucesso!");
+            limpar();
+            preencherListaProdutos();
+            preencherListaMaterial();
+        } catch (HeadlessException | NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Algo errado!");
+            System.out.println("Não foi possível lançar Material");
+        }
     }//GEN-LAST:event_jButtonLancamentoMeterialActionPerformed
 
     private void jTextFieldQntLancProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldQntLancProdutoActionPerformed
@@ -317,6 +334,8 @@ public class Lancamentos extends javax.swing.JDialog {
             ProdutoDAO.lancamentoProdutoEstoque(quantidade, idProduto);
             JOptionPane.showMessageDialog(null, "Lançado com sucesso!");
             limpar();
+            preencherListaProdutos();
+            preencherListaMaterial();
         } catch (HeadlessException | NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Algo errado!");
             System.out.println("Não foi possível lançar Produto");
@@ -331,11 +350,29 @@ public class Lancamentos extends javax.swing.JDialog {
             ProdutoDAO.baixaProdutoEstoque(quantidade, idProduto);
             JOptionPane.showMessageDialog(null, "Baixa com sucesso!");
             limpar();
+            preencherListaProdutos();
+            preencherListaMaterial();
         } catch (HeadlessException | NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Algo errado!");
             System.out.println("Não foi possível dar baixa em Produto");
         }
     }//GEN-LAST:event_jButtonBaixaProdutoActionPerformed
+
+    private void jButtonBaixaMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBaixaMaterialActionPerformed
+        try {
+            int quantidade = Integer.parseInt(this.jTextFieldQntBaixaMaterial.getText());
+            MateriaPrima mp = materiais.get(this.jComboBoxMateriaPrimaBaixa.getSelectedIndex());
+            int idMaterial = mp.getId();
+            MateriaPrimaDAO.baixaMaterialEstoque(quantidade, idMaterial);
+            JOptionPane.showMessageDialog(null, "Baixa com sucesso!");
+            limpar();
+            preencherListaProdutos();
+            preencherListaMaterial();
+        } catch (HeadlessException | NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Algo errado!");
+            System.out.println("Não foi possível dar baixa em Material");
+        }
+    }//GEN-LAST:event_jButtonBaixaMaterialActionPerformed
 
     private void limpar() {
         this.jTextFieldQntBaixaMaterial.setText("");
@@ -343,7 +380,7 @@ public class Lancamentos extends javax.swing.JDialog {
         this.jTextFieldQntLancMaterial.setText("");
         this.jTextFieldQntLancProduto.setText("");
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonBaixaMaterial;
     private javax.swing.JButton jButtonBaixaProduto;
