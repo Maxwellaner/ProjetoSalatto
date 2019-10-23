@@ -5,6 +5,7 @@ import Model.Pedido;
 import Model.Produto;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import Util.Util;
 
 public class PedidoFechar extends javax.swing.JDialog {
 
@@ -22,8 +23,8 @@ public class PedidoFechar extends javax.swing.JDialog {
         this.jLabelNumPedido.setText(Integer.toString(pedido.getId()));
         this.jLabelDataPedido.setText(pedido.getDataPedido().toString());
         this.jLabelDataEntrega.setText(pedido.getDataEntrega().toString());
-        this.jLabelValor.setText(Double.toString(pedido.getValorTotal()));
-        this.jLabelAdiantamento.setText(Double.toString(pedido.getAdiantamento()));
+        this.jLabelValor.setText(Util.formatarValor(pedido.getValorTotal()));
+        this.jLabelAdiantamento.setText(Util.formatarValor(pedido.getAdiantamento()));
 
         if (pedido.getEmpresa() != null) {
             this.jLabelEndereco.setText(pedido.getEmpresa().getEndereco());

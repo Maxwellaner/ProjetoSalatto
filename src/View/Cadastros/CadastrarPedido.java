@@ -30,7 +30,6 @@ public class CadastrarPedido extends javax.swing.JDialog {
     private List<Empresa> empresas;
     private double valorTotal;
     private List<Produto> listaCompras;
-    private List quantidade;
     private Pedido pedido;
 
     public CadastrarPedido(java.awt.Frame parent, boolean modal) {
@@ -43,7 +42,6 @@ public class CadastrarPedido extends javax.swing.JDialog {
         escolhaComprador();
         this.valorTotal = 0;
         listaCompras = new ArrayList<>();
-        quantidade = new ArrayList();
         evtTable();
     }
 
@@ -491,12 +489,12 @@ public class CadastrarPedido extends javax.swing.JDialog {
             try {
                 if (this.jRadioButtonCliente.isSelected()) {
                     Cliente cliente = clientes.get(this.jComboBoxClientes.getSelectedIndex());
-                    pedido = new Pedido(cliente, listaCompras, quantidade, pago,
+                    pedido = new Pedido(cliente, listaCompras, pago,
                             adiantamento,
                             valorTotal, dataAtual, dataEntrega);
                 } else {
                     Empresa empresa = empresas.get(this.jComboBoxEmpresas.getSelectedIndex());
-                    pedido = new Pedido(empresa, listaCompras, quantidade, pago,
+                    pedido = new Pedido(empresa, listaCompras, pago,
                             adiantamento,
                             valorTotal, dataAtual, dataEntrega);
                 }
@@ -506,7 +504,7 @@ public class CadastrarPedido extends javax.swing.JDialog {
             }
 
             try {
-                PedidoDAO.cadastrarPedido(pedido, listaCompras, quantidade);
+                PedidoDAO.cadastrarPedido(pedido, listaCompras);
                 this.valorTotal = 0;
                 this.jLabelValorTotal.setText(Util.formatarValor(valorTotal));
                 this.dispose();
@@ -560,10 +558,10 @@ public class CadastrarPedido extends javax.swing.JDialog {
 
         if (!this.listaCompras.contains(produto) && !"".equals(this.txtQuantidade.getText())
                 && (produto.getQuantidadeEstoque() >= Integer.parseInt(this.txtQuantidade.getText()))) {
+            produto.setQuantidadePorPedido(Integer.parseInt(this.txtQuantidade.getText()));
             this.listaCompras.add(produto);
-            this.quantidade.add(Integer.parseInt(this.txtQuantidade.getText()));
 
-            Object[] dados = {produto.getId() + ". " + produto.getNome(), this.txtQuantidade.getText()};
+            Object[] dados = {produto.getId() + ". " + produto.getNome(), produto.getQuantidadePorPedido()};
             dfmodel.addRow(dados);
 
             valorTotal += (double) (produto.getValorVenda() * Integer.parseInt(this.txtQuantidade.getText()));
@@ -606,10 +604,8 @@ public class CadastrarPedido extends javax.swing.JDialog {
                             indiceProduto = i;
                         }
                     }
-                    Object qnt = jTableCompras.getModel().getValueAt(linha, 1);
                     listaCompras.remove(produto);
-                    quantidade.remove(quantidade.get(indiceProduto));
-                    valorTotal = (double) valorTotal - (produto.getValorVenda() * Double.parseDouble((String) qnt));
+                    valorTotal = (double) valorTotal - (produto.getValorVenda() * produto.getQuantidadePorPedido());
                     DefaultTableModel dfmodel = (DefaultTableModel) jTableCompras.getModel();
                     dfmodel.removeRow(linha);
                 }

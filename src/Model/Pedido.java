@@ -19,12 +19,11 @@ public class Pedido {
     private int idCliente;
     private int idEmpresa;
     
-    public Pedido(Cliente cliente, List<Produto> listaCompras, List quantidade, 
+    public Pedido(Cliente cliente, List<Produto> listaCompras, 
             boolean isPago, double adiantamento, 
             double valorTotal, Date dataPedido, Date dataEntrega) {
         this.cliente = cliente;
         this.produtos = listaCompras;
-        this.quantidade = quantidade;
         this.isPago = isPago;
         this.adiantamento = adiantamento;
         this.dataPedido = dataPedido;
@@ -33,7 +32,7 @@ public class Pedido {
         this.idCliente = cliente.getId();
     }
     
-    public Pedido(Empresa empresa, List<Produto> listaCompras, List quantidade,
+    public Pedido(Empresa empresa, List<Produto> listaCompras,
             boolean isPago, double adiantamento, double valorTotal,
             Date dataPedido, Date dataEntrega) {
         this.empresa = empresa;

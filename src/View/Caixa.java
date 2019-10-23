@@ -6,6 +6,7 @@ import Model.Pedido;
 import java.util.List;
 import Util.Util;
 import View.Cadastros.CadastrarPedido;
+import View.visualizadores.VisualizarPedido;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,6 +18,7 @@ public class Caixa extends javax.swing.JDialog {
     private double valorTotal;
     private double despesas;
     private double lucro;
+    java.awt.Frame pai;
 
     public Caixa(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -65,6 +67,11 @@ public class Caixa extends javax.swing.JDialog {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
+        });
+        jListPedidosFechados.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jListPedidosFechadosMouseClicked(evt);
+            }
         });
         jScrollPane1.setViewportView(jListPedidosFechados);
 
@@ -154,6 +161,15 @@ public class Caixa extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jListPedidosFechadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListPedidosFechadosMouseClicked
+        Pedido pedido = null;
+        pedidos = new ArrayList<>(PedidoDAO.pedidosHoje());
+        pedido = pedidos.get(jListPedidosFechados.getSelectedIndex());
+        VisualizarPedido pv = new VisualizarPedido(pai, true, pedido);
+        pv.setVisible(true);
+    }//GEN-LAST:event_jListPedidosFechadosMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonFecharCaixa;
     private javax.swing.JLabel jLabel1;

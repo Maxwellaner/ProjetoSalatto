@@ -20,18 +20,15 @@ import java.util.ArrayList;
 public class PedidoDAO {
 
     private static List<Produto> listaProdutos;
-    private static List quantidadeProdutos;
 
     /**
      * Método para cadastrar os pedidos.
      * @param pedido
      * @param produtos
-     * @param quantidade 
      */
-    public static void cadastrarPedido(Pedido pedido, List<Produto> produtos, List quantidade) {
+    public static void cadastrarPedido(Pedido pedido, List<Produto> produtos) {
 
         listaProdutos = produtos;
-        quantidadeProdutos = quantidade;
 
         try {
             Connection conn = Conexao.conectar();
@@ -80,7 +77,7 @@ public class PedidoDAO {
                 for (int i = 0; i <= produtos.size() - 1; i++) {
                     comando.setInt(1, ultimoRegistro);
                     comando.setInt(2, listaProdutos.get(i).getId());
-                    comando.setInt(3, (int) quantidadeProdutos.get(i));
+                    comando.setInt(3, (int) listaProdutos.get(i).getQuantidadePorPedido());
 
                     comando.executeUpdate();
                 }
@@ -112,7 +109,7 @@ public class PedidoDAO {
             conn = Conexao.conectar();
 
             for (int i = 0; i <= listaProdutos.size() - 1; i++) {
-                String sqlConsulta = "UPDATE produtos SET quantidadeEstoque=quantidadeEstoque-" + quantidadeProdutos.get(i)
+                String sqlConsulta = "UPDATE produtos SET quantidadeEstoque=quantidadeEstoque-" + listaProdutos.get(i).getQuantidadePorPedido()
                         + " WHERE id=" + listaProdutos.get(i).getId();
                 comando = conn.prepareStatement(sqlConsulta);
                 comando.executeUpdate();

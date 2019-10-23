@@ -77,6 +77,7 @@ public class Produto {
     public void setQuantidadePorPedido(int quantidadePorPedido) {
         this.quantidadePorPedido = quantidadePorPedido;
     }
+    
 
     @Override
     public String toString() {
