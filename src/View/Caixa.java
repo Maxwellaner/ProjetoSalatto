@@ -41,7 +41,6 @@ public class Caixa extends javax.swing.JDialog {
         jLabel5 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jListPedidosFechados = new javax.swing.JList<>();
-        jButtonFecharCaixa = new javax.swing.JButton();
         jLabelValorTotal = new javax.swing.JLabel();
         jLabelDespesas = new javax.swing.JLabel();
         jLabelLucro = new javax.swing.JLabel();
@@ -75,10 +74,6 @@ public class Caixa extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(jListPedidosFechados);
 
-        jButtonFecharCaixa.setFont(new java.awt.Font("Tw Cen MT", 1, 14)); // NOI18N
-        jButtonFecharCaixa.setText("Fechar Caixa");
-        jButtonFecharCaixa.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
         jLabelValorTotal.setFont(new java.awt.Font("Tw Cen MT", 3, 18)); // NOI18N
         jLabelValorTotal.setText("0");
 
@@ -102,8 +97,7 @@ public class Caixa extends javax.swing.JDialog {
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabelValorTotal)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonFecharCaixa))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 483, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -153,10 +147,8 @@ public class Caixa extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(jLabelLucro))
-                        .addGap(271, 271, 271)
-                        .addComponent(jButtonFecharCaixa, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(29, 29, 29))
+                            .addComponent(jLabelLucro))))
+                .addGap(52, 52, 52))
         );
 
         pack();
@@ -171,7 +163,6 @@ public class Caixa extends javax.swing.JDialog {
     }//GEN-LAST:event_jListPedidosFechadosMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonFecharCaixa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

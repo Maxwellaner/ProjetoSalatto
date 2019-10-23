@@ -162,14 +162,20 @@ public class CadastrarPedido extends javax.swing.JDialog {
         jLabel7.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
         jLabel7.setText("Adicione os produtos ao carrinho de compras");
 
+        jButtonAdicionarProduto.setBackground(new java.awt.Color(255, 255, 255));
         jButtonAdicionarProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/more.png"))); // NOI18N
+        jButtonAdicionarProduto.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jButtonAdicionarProduto.setOpaque(false);
         jButtonAdicionarProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAdicionarProdutoActionPerformed(evt);
             }
         });
 
+        jButtonCadastrarPedido.setBackground(new java.awt.Color(255, 255, 255));
         jButtonCadastrarPedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/salvar.png"))); // NOI18N
+        jButtonCadastrarPedido.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jButtonCadastrarPedido.setOpaque(false);
         jButtonCadastrarPedido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCadastrarPedidoActionPerformed(evt);
