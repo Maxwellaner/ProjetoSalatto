@@ -69,4 +69,50 @@ public class ClienteDAO {
         }
     }
 
+    public static void alterar(Cliente c) {
+        try {
+            Connection conn = Conexao.conectar();
+            PreparedStatement comando = null;
+            
+            try {
+                comando = conn.prepareStatement("UPDATE clientes SET nome=?, endereco=?, cpf=?, celular=?, telefone=?, nascimento=?, email=?"
+                        + " WHERE id=?");
+                comando.setString(1, c.getNome());
+                comando.setString(2, c.getEndereco());
+                comando.setString(3, c.getCPF());
+                comando.setString(4, c.getCelular());
+                comando.setString(5, c.getTelefone());
+                comando.setDate(6, c.getNascimento());
+                comando.setString(7, c.getEmail());
+                comando.setInt(8, c.getId());
+                
+                comando.executeUpdate();
+                
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Erro ao alterar! " + ex);
+            } finally {
+                Conexao.fecharConexao(conn, comando);
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Algo errado com a conexão!");
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static void excluir(int id) {
+        Connection conn = null;
+        PreparedStatement comando = null;
+        
+        try{
+            conn = Conexao.conectar();
+            comando = conn.prepareStatement("DELETE FROM clientes WHERE id=?");
+            comando.setInt(1, id);
+            System.out.println(comando);
+            comando.executeUpdate();
+        } catch (Exception ex) {
+            System.out.println("Erro ao deletar Cliente");
+        } finally {
+            Conexao.fecharConexao(conn, comando);
+        }
+    }
 }

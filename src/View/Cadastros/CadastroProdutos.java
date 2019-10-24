@@ -57,6 +57,12 @@ public class CadastroProdutos extends javax.swing.JDialog {
         jLabel5.setFont(new java.awt.Font("Tw Cen MT", 3, 14)); // NOI18N
         jLabel5.setText("Quantidade em estoque *");
 
+        txtQuantidadeEstoque.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtQuantidadeEstoqueKeyTyped(evt);
+            }
+        });
+
         txtValorVenda.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtValorVendaKeyTyped(evt);
@@ -213,11 +219,20 @@ public class CadastroProdutos extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_txtValorVendaKeyTyped
 
+    private void txtQuantidadeEstoqueKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtQuantidadeEstoqueKeyTyped
+        String s = ",;/asdfghjklçpoiuytrewqzxcvbnm!@#$%¨&*()_+=-\\[]{}º?°:><`´´ª|.";
+
+        if (s.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtQuantidadeEstoqueKeyTyped
+
     private void limpar() {
         this.txtNomeProduto.setText("");
         this.txtQuantidadeEstoque.setText("");
         this.txtValorCusto.setText("");
         this.txtValorVenda.setText("");
+        this.txtDescricao.setText("");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

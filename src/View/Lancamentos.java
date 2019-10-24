@@ -323,7 +323,7 @@ public class Lancamentos extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonLancamentoMeterialActionPerformed
 
     private void jTextFieldQntLancProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldQntLancProdutoActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jTextFieldQntLancProdutoActionPerformed
 
     private void jButtonLancamentoProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLancamentoProdutoActionPerformed

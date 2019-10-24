@@ -69,4 +69,51 @@ public class EmpresaDAO {
 
         return listaEmpresas;
     }
+    
+    public static void excluir(int id) {
+        Connection conn = null;
+        PreparedStatement comando = null;
+        
+        try{
+            conn = Conexao.conectar();
+            comando = conn.prepareStatement("DELETE FROM empresas WHERE id=?");
+            comando.setInt(1, id);
+            comando.executeUpdate();
+        } catch (Exception ex) {
+            System.out.println("Erro ao deletar Empresa");
+        } finally {
+            Conexao.fecharConexao(conn, comando);
+        }
+    }
+    
+    public static void alterar(Empresa e) {
+        try {
+            Connection conn = Conexao.conectar();
+            PreparedStatement comando = null;
+            
+            try {
+                comando = conn.prepareStatement("UPDATE empresas SET nomeFantasia=?, razaoSocial=?, cnpj=?, celular=?, telefone=?, email=?, dataContrato=?, endereco=?"
+                        + " WHERE id=?");
+                comando.setString(1, e.getNomeFantasia());
+                comando.setString(2, e.getRazaoSocial());
+                comando.setString(3, e.getCnpj());
+                comando.setString(4, e.getCelularComercial());
+                comando.setString(5, e.getTelefoneComercial());
+                comando.setString(6, e.getEmailComercial());
+                comando.setDate(7, e.getDataContrato());
+                comando.setString(8, e.getEndereco());
+                comando.setInt(9, e.getId());
+                
+                comando.executeUpdate();
+                
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Erro ao alterar! " + ex);
+            } finally {
+                Conexao.fecharConexao(conn, comando);
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Algo errado com a conexão!");
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

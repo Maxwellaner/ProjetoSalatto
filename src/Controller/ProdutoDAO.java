@@ -79,6 +79,34 @@ public class ProdutoDAO {
         }
     }
     
+    public static void alterar(Produto p) {
+        try {
+            Connection conn = Conexao.conectar();
+            PreparedStatement comando = null;
+            
+            try {
+                comando = conn.prepareStatement("UPDATE produtos SET nome=?, quantidadeEstoque=?, valorCompra=?, valorVenda=?, descricao=?"
+                        + " WHERE id=?");
+                comando.setString(1, p.getNome());
+                comando.setInt(2, p.getQuantidadeEstoque());
+                comando.setDouble(3, p.getValorCompra());
+                comando.setDouble(4, p.getValorVenda());
+                comando.setString(5, p.getDescricao());
+                comando.setInt(6, p.getId());
+                
+                comando.executeUpdate();
+                
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Erro ao alterar! " + ex);
+            } finally {
+                Conexao.fecharConexao(conn, comando);
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Algo errado com a conexão!");
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public static void baixaProdutoEstoque(int quantidade, int idProduto) {
         Connection conn = null;
         PreparedStatement comando = null;
@@ -122,7 +150,6 @@ public class ProdutoDAO {
             conn = Conexao.conectar();
             comando = conn.prepareStatement("DELETE FROM produtos WHERE id=?");
             comando.setInt(1, id);
-            System.out.println(comando);
             comando.executeUpdate();
         } catch (Exception ex) {
             System.out.println("Erro ao deletar Produto");
@@ -130,4 +157,5 @@ public class ProdutoDAO {
             Conexao.fecharConexao(conn, comando);
         }
     }
+    
 }
